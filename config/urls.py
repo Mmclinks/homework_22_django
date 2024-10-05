@@ -5,5 +5,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('catalog.urls', namespace='catalog')),  # Включение маршрутов из приложения catalog
+    path('', include('catalog.urls', namespace='catalog')),  # Подключение маршрутов приложения catalog
 ]
