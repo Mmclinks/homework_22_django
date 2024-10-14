@@ -1,0 +1,32 @@
+[
+  {
+    "fields": {
+      "created_at": "2024-10-13T21:49:01.474Z",
+      "description": "Все о электронике",
+      "name": "Электроника",
+      "updated_at": "2024-10-13T21:49:01.474Z"
+    },
+    "model": "catalog.category",
+    "pk": 1
+  },
+  {
+    "fields": {
+      "created_at": "2024-10-13T21:49:01.477Z",
+      "description": "Модная одежда",
+      "name": "Одежда",
+      "updated_at": "2024-10-13T21:49:01.478Z"
+    },
+    "model": "catalog.category",
+    "pk": 2
+  },
+  {
+    "fields": {
+      "created_at": "2024-10-13T21:49:01.480Z",
+      "description": "Книги разных жанров",
+      "name": "Книги",
+      "updated_at": "2024-10-13T21:49:01.480Z"
+    },
+    "model": "catalog.category",
+    "pk": 3
+  }
+]

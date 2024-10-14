@@ -1,11 +1,12 @@
-from django.urls import path, include
-from catalog.apps import CatalogConfig
-from . import views
+from django.urls import path
 
-app_name = CatalogConfig
+from catalog import views
+from catalog.apps import CatalogConfig
+from catalog.views import home
+
+app_name = CatalogConfig.name
 
 urlpatterns = [
-    path('', include('catalog.urls', namespace='catalog')),
-    path('', views.home, name='home'),
-    path('contacts.html/', views.contacts, name='contacts.html'),
+    path("", home, name="home"),
+    path("contacts/", views.contacts, name="contacts"),
 ]
