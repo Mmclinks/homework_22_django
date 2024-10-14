@@ -7,11 +7,20 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.12"
-django = "^5.1.1"
+django = "^5.1.2"
 path = "^17.0.0"
 messages = "^0.8.0"
+psycopg2-binary = "^2.9.9"
+python-dotenv = "^1.0.1"
+pillow = "^10.4.0"
+black = "^24.10.0"
+ipython = "^8.28.0"
+contact = "^1.0.5"
 
+
+[tool.poetry.group.dev.dependencies]
+safety = "^3.2.8"
 
 [build-system]
-requires = ["poetry-core"]
+requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
