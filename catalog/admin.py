@@ -22,5 +22,3 @@ class ProductAdmin(admin.ModelAdmin):
 # Регистрация моделей в админке
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Product, ProductAdmin)
-
-admin.site.register(Contact)
