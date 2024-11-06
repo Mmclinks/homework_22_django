@@ -16,6 +16,8 @@ pillow = "^10.4.0"
 black = "^24.10.0"
 ipython = "^8.28.0"
 contact = "^1.0.5"
+blog = "^1.0.1"
+views = "^0.3"
 
 
 [tool.poetry.group.dev.dependencies]

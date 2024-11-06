@@ -1,24 +1,14 @@
 from django.contrib import admin
-from .models import Category, Product
-from .models import Contact
+from .models import Product, Category
 
 
-class CategoryAdmin(admin.ModelAdmin):
-    list_display = ("id", "name")  # Отображаем id и name
-    search_fields = ("name",)  # Поиск по name
-
-
+@admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = (
-        "id",
-        "name",
-        "price",
-        "category",
-    )  # Отображаем id, name, price и category
-    list_filter = ("category",)  # Фильтрация по category
-    search_fields = ("name", "description")  # Поиск по name и description
+    list_display = ('id', 'name', 'price', 'category')
+    list_filter = ('category',)
+    search_fields = ('name', 'description')
 
 
-# Регистрация моделей в админке
-admin.site.register(Category, CategoryAdmin)
-admin.site.register(Product, ProductAdmin)
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name')
