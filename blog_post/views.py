@@ -2,7 +2,6 @@ from django.core.mail import EmailMessage
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, DeleteView
 from django.views.generic.edit import CreateView, UpdateView
-
 from blog_post.models import BlogPost
 
 
@@ -69,6 +68,7 @@ class ArticleUpdateView(UpdateView):
     model = BlogPost
     fields = ['title', 'content', 'preview_image', 'is_published']
     template_name = 'blog/article_form.html'
+
     # success_url = reverse_lazy('blog:home')
 
     def get_success_url(self):
