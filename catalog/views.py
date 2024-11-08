@@ -5,6 +5,7 @@ from catalog.models import Product
 from django.contrib import messages
 from django.core.mail import EmailMessage
 from catalog.forms.forms import ContactForm
+from catalog.forms.forms import ProductForm
 
 
 class ProductListView(ListView):
@@ -17,13 +18,14 @@ class ProductListView(ListView):
 
 
 class ProductCreateView(CreateView):
-    """
-    Представление создания товара
-    """
     model = Product
-    fields = ['name', 'description', 'image', 'category', 'price']
+    form_class = ProductForm
     template_name = 'catalog/product_form.html'
-    success_url = reverse_lazy('catalog:products_list')
+    success_url = reverse_lazy('catalog:product_list')
+
+    def form_valid(self, form):
+        # Дополнительная логика, если нужно
+        return super().form_valid(form)
 
 
 class ProductDetailView(DetailView):
@@ -36,13 +38,14 @@ class ProductDetailView(DetailView):
 
 
 class ProductUpdateView(UpdateView):
-    """
-    Представление редактирования товара
-    """
     model = Product
-    fields = ['name', 'description', 'image', 'category', 'price']
+    form_class = ProductForm
     template_name = 'catalog/product_form.html'
-    success_url = reverse_lazy('catalog:products_list')
+    success_url = reverse_lazy('catalog:product_list')
+
+    def form_valid(self, form):
+        # Дополнительная логика, если нужно
+        return super().form_valid(form)
 
 
 class ProductDeleteView(DeleteView):
