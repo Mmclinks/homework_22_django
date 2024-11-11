@@ -1,4 +1,5 @@
 from django.contrib import admin
+
 from .models import BlogPost
 
 
@@ -7,6 +8,14 @@ class BlogAdmin(admin.ModelAdmin):
     """
     Ругистрация модели в админке
     """
-    list_display = ('title', 'content', 'preview_image', 'is_published', 'views_count', 'created_at')
-    list_filter = ('title', 'is_published')
-    search_fields = ('title', 'created_at')
+
+    list_display = (
+        "title",
+        "content",
+        "preview_image",
+        "is_published",
+        "views_count",
+        "created_at",
+    )
+    list_filter = ("title", "is_published")
+    search_fields = ("title", "created_at")

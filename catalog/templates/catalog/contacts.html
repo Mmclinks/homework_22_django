@@ -1,58 +1,115 @@
+{#{% extends 'base.html' %}#}
+{#{% load catalog_my_tags %}#}
+{#{% block content %}#}
+{##}
+{#    <!--<h2>Свяжитесь с нами</h2>-->#}
+{#    <!--<form method="post">-->#}
+{#    <!--    {% csrf_token %}-->#}
+{#    <!--    {{ form.as_p }}  &lt;!&ndash; Отобразить форму &ndash;&gt;-->#}
+{#    <!--    <button type="submit">Отправить</button>-->#}
+{#    <!--</form>-->#}
+{##}
+{#    <div class="container">#}
+{#        <div class="row text-start">#}
+{##}
+{#            <div class="col-lg-3 col-md-6 col-sm-12">#}
+{#                <div class="card mb-4 box-shadow">#}
+{#                    <div class="card-header">#}
+{#                        <h4 class="my-0 font-weight-normal">Свяжитесь с нами</h4>#}
+{#                    </div>#}
+{#                    <div class="card-body">#}
+{#                        <form method="post" action="" class="form-floating">#}
+{#                            {% csrf_token %}#}
+{#                            <div class="mb-3">#}
+{#                                <label for="name">Имя</label>#}
+{#                                <input type="text" name="name" class="form-control" id="name" placeholder="Ваше имя"#}
+{#                                       required>#}
+{#                            </div>#}
+{#                            <div class="mb-3">#}
+{#                                <label for="phone">Телефон</label>#}
+{#                                <input type="text" name="phone" class="form-control" id="phone"#}
+{#                                       placeholder="Контактный телефон" required>#}
+{#                            </div>#}
+{#                            <div class="mb-3">#}
+{#                                <label for="message">Сообщение</label>#}
+{#                                <textarea type="text" name="message" class="form-control" id="message"#}
+{#                                          placeholder="Ваше сообщение" required></textarea>#}
+{#                            </div>#}
+{#                            <button type="submit" class="btn btn-lg btn-block btn-outline-primary">Отправить</button>#}
+{#                        </form>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{##}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#    {% if messages %}#}
+{#        {% for message in messages %}#}
+{#            <div class="alert alert-success">{{ message }}</div>#}
+{#        {% endfor %}#}
+{#        <script>#}
+{#            // Перенаправление через 10 секунд#}
+{#            setTimeout(function () {#}
+{#                window.location.href = "{% url 'catalog:contacts' %}";#}
+{#            }, 3000);  // 10000 миллисекунд = 3 секунды#}
+{#        </script>#}
+{#    {% endif %}#}
+{#{% endblock %}#}
+
 {% extends 'base.html' %}
 {% load catalog_my_tags %}
 {% block content %}
 
-    <!--<h2>Свяжитесь с нами</h2>-->
-    <!--<form method="post">-->
-    <!--    {% csrf_token %}-->
-    <!--    {{ form.as_p }}  &lt;!&ndash; Отобразить форму &ndash;&gt;-->
-    <!--    <button type="submit">Отправить</button>-->
-    <!--</form>-->
-
-    <div class="container">
-        <div class="row text-start">
-
-            <div class="col-lg-3 col-md-6 col-sm-12">
-                <div class="card mb-4 box-shadow">
-                    <div class="card-header">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8 col-sm-12">
+                <div class="card shadow-lg border-light rounded-3">
+                    <div class="card-header text-center bg-primary text-white">
                         <h4 class="my-0 font-weight-normal">Свяжитесь с нами</h4>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="" class="form-floating">
+                        <form method="post" action="" class="form-floating needs-validation" novalidate>
                             {% csrf_token %}
                             <div class="mb-3">
-                                <label for="name">Имя</label>
+                                <label for="name" class="form-label">Имя</label>
                                 <input type="text" name="name" class="form-control" id="name" placeholder="Ваше имя"
                                        required>
+                                <div class="invalid-feedback">Пожалуйста, введите ваше имя.</div>
                             </div>
                             <div class="mb-3">
-                                <label for="phone">Телефон</label>
+                                <label for="phone" class="form-label">Телефон</label>
                                 <input type="text" name="phone" class="form-control" id="phone"
                                        placeholder="Контактный телефон" required>
+                                <div class="invalid-feedback">Пожалуйста, введите ваш телефон.</div>
                             </div>
                             <div class="mb-3">
-                                <label for="message">Сообщение</label>
-                                <textarea type="text" name="message" class="form-control" id="message"
-                                          placeholder="Ваше сообщение" required></textarea>
+                                <label for="message" class="form-label">Сообщение</label>
+                                <textarea name="message" class="form-control" id="message" placeholder="Ваше сообщение"
+                                          required></textarea>
+                                <div class="invalid-feedback">Пожалуйста, введите ваше сообщение.</div>
                             </div>
-                            <button type="submit" class="btn btn-lg btn-block btn-outline-primary">Отправить</button>
+                            <button type="submit" class="btn btn-primary btn-lg btn-block mt-3" id="submitBtn">
+                                Отправить
+                            </button>
                         </form>
                     </div>
                 </div>
             </div>
-
         </div>
+
+        {% if messages %}
+            <div class="alert alert-success alert-dismissible fade show mt-4" role="alert">
+                <strong>Сообщение отправлено успешно!</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <script>
+                // Перенаправление через 3 секунды
+                setTimeout(function () {
+                    window.location.href = "{% url 'catalog:contacts' %}";
+                }, 3000); // 3000 миллисекунд = 3 секунды
+            </script>
+        {% endif %}
     </div>
 
-    {% if messages %}
-        {% for message in messages %}
-            <div class="alert alert-success">{{ message }}</div>
-        {% endfor %}
-        <script>
-            // Перенаправление через 10 секунд
-            setTimeout(function () {
-                window.location.href = "{% url 'catalog:contacts' %}";
-            }, 3000);  // 10000 миллисекунд = 3 секунды
-        </script>
-    {% endif %}
 {% endblock %}

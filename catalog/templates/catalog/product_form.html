@@ -1,8 +1,82 @@
+{#{% extends 'base.html' %}#}
+{##}
+{#{% block content %}#}
+{#    <div class="container mt-5">#}
+{#        <h1>{% if object %}Редактирование{% else %}Создание{% endif %} продукта</h1>#}
+{##}
+{#        <form method="post" enctype="multipart/form-data">#}
+{#            {% csrf_token %}#}
+{##}
+{#            <!-- Поле name с отдельным выводом ошибок -->#}
+{#            <div class="form-group">#}
+{#                {{ form.name.label_tag }}#}
+{#                {{ form.name }}#}
+{#                {% if form.name.errors %}#}
+{#                    <div class="error">#}
+{#                        {% with showed_forbidden_error=False %}#}
+{#                            {% for error in form.name.errors %}#}
+{#                                {% if 'содержит запрещённое слово' in error and not showed_forbidden_error %}#}
+{#                                    <p class="text-danger">{{ error }}</p>#}
+{#                                    {% with showed_forbidden_error=True %}{% endwith %}#}
+{#                                {% elif not 'содержит запрещённое слово' in error %}#}
+{#                                    <p class="text-danger">{{ error }}</p>#}
+{#                                {% endif %}#}
+{#                            {% endfor %}#}
+{#                        {% endwith %}#}
+{#                    </div>#}
+{#                {% endif %}#}
+{#            </div>#}
+{##}
+{#            <!-- Поле description -->#}
+{#            <div class="form-group">#}
+{#                {{ form.description.label_tag }}#}
+{#                {{ form.description }}#}
+{#                {% if form.description.errors %}#}
+{#                    <div class="error">#}
+{#                        {% for error in form.description.errors %}#}
+{#                            <p class="text-danger">{{ error }}</p>#}
+{#                        {% endfor %}#}
+{#                    </div>#}
+{#                {% endif %}#}
+{#            </div>#}
+{##}
+{#            <!-- Поле image -->#}
+{#            <div class="form-group">#}
+{#                {{ form.image.label_tag }}#}
+{#                {{ form.image }}#}
+{#            </div>#}
+{##}
+{#            <!-- Поле category -->#}
+{#            <div class="form-group">#}
+{#                {{ form.category.label_tag }}#}
+{#                {{ form.category }}#}
+{#            </div>#}
+{##}
+{#            <!-- Поле price с отдельным выводом ошибок -->#}
+{#            <div class="form-group">#}
+{#                {{ form.price.label_tag }}#}
+{#                {{ form.price }}#}
+{#                {% if form.price.errors %}#}
+{#                    <div class="error">#}
+{#                        {% for error in form.price.errors %}#}
+{#                            <p class="text-danger">{{ error }}</p>#}
+{#                        {% endfor %}#}
+{#                    </div>#}
+{#                {% endif %}#}
+{#            </div>#}
+{##}
+{#            <!-- Кнопка для отправки формы -->#}
+{#            <button type="submit" class="btn btn-primary mt-3">{% if object %}Сохранить{% else %}#}
+{#                Создать{% endif %}</button>#}
+{#        </form>#}
+{#    </div>#}
+{#{% endblock %}#}
+{#******************************************************************************************#}
 {% extends 'base.html' %}
 
 {% block content %}
     <div class="container mt-5">
-        <h1>{% if object %}Редактирование{% else %}Создание{% endif %} продукта</h1>
+        <h1 class="text-center text-primary">{% if object %}Редактирование{% else %}Создание{% endif %} продукта</h1>
 
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
@@ -12,7 +86,7 @@
                 {{ form.name.label_tag }}
                 {{ form.name }}
                 {% if form.name.errors %}
-                    <div class="error">
+                    <div class="error mt-2">
                         {% with showed_forbidden_error=False %}
                             {% for error in form.name.errors %}
                                 {% if 'содержит запрещённое слово' in error and not showed_forbidden_error %}
@@ -32,7 +106,7 @@
                 {{ form.description.label_tag }}
                 {{ form.description }}
                 {% if form.description.errors %}
-                    <div class="error">
+                    <div class="error mt-2">
                         {% for error in form.description.errors %}
                             <p class="text-danger">{{ error }}</p>
                         {% endfor %}
@@ -57,7 +131,7 @@
                 {{ form.price.label_tag }}
                 {{ form.price }}
                 {% if form.price.errors %}
-                    <div class="error">
+                    <div class="error mt-2">
                         {% for error in form.price.errors %}
                             <p class="text-danger">{{ error }}</p>
                         {% endfor %}
@@ -66,7 +140,7 @@
             </div>
 
             <!-- Кнопка для отправки формы -->
-            <button type="submit" class="btn btn-primary mt-3">{% if object %}Сохранить{% else %}
+            <button type="submit" class="btn btn-primary mt-3 btn-block">{% if object %}Сохранить{% else %}
                 Создать{% endif %}</button>
         </form>
     </div>

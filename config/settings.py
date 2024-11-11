@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'catalog',
     'blog_post',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -79,7 +80,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LANGUAGE_CODE = 'en-us'
+# LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'Europe/Moscow'
 
@@ -89,7 +91,7 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / 'static',]
+STATICFILES_DIRS = [BASE_DIR / 'static', ]
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 MEDIA_URL = '/media/'
@@ -98,9 +100,15 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.rambler.ru'
-EMAIL_PORT = 465  # Для SSL
-EMAIL_USE_SSL = True
+EMAIL_HOST = 'smtp.email.com'
+EMAIL_PORT = 587  # Для SSL
+EMAIL_USE_TSL = False
 EMAIL_HOST_USER = os.getenv('MY_EMAIL')  # Ваш email на Rambler
 EMAIL_HOST_PASSWORD = os.getenv('MY_EMAIL_PASSWORD')  # Ваш пароль
-DEFAULT_FROM_EMAIL = os.getenv('MY_EMAIL')
+EMAIL_TIMEOUT = 30
+
+AUTH_USER_MODEL = 'users.User'
+
+LOGIN_URL = '/users/login/'  # Путь к странице логина
+LOGIN_REDIRECT_URL = '/'  # Путь для редиректа после успешного входа
+LOGOUT_REDIRECT_URL = '/'
