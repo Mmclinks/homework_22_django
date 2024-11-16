@@ -1,0 +1,339 @@
+{#<h1>{{ product.name }}</h1>#}
+{#<p>{{ product.description }}</p>#}
+{#<p>Цена: {{ product.price }}</p>#}
+{##}
+{#{% if product.image %}#}
+{#    <img src="{{ product.image.url }}" alt="{{ product.name }}">#}
+{#{% else %}#}
+{#    <p>Изображение отсутствует</p>#}
+{#{% endif %}#}
+{##}
+{#<a href="{% url 'catalog:product_update' product.pk %}">Редактировать</a>#}
+{#<a href="{% url 'catalog:product_delete' product.pk %}">Удалить</a>#}
+{##}
+{#<!DOCTYPE html>#}
+{#<html lang="ru">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <meta name="viewport" content="width=device-width, initial-scale=1.0">#}
+{#    <title>{{ product.name }}</title>#}
+{#    <style>#}
+{#        /* Основные стили страницы */#}
+{#        body {#}
+{#            font-family: Arial, sans-serif;#}
+{#            margin: 0;#}
+{#            padding: 0;#}
+{#            background-color: #f8f9fa;#}
+{#            color: #333;#}
+{#        }#}
+{##}
+{#        /* Контейнер страницы */#}
+{#        .container {#}
+{#            max-width: 800px;#}
+{#            margin: 20px auto;#}
+{#            padding: 20px;#}
+{#            background-color: #fff;#}
+{#            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);#}
+{#            border-radius: 8px;#}
+{#            animation: fadeIn 1s ease-in-out;#}
+{#        }#}
+{##}
+{#        /* Анимация для плавного появления */#}
+{#        @keyframes fadeIn {#}
+{#            from {#}
+{#                opacity: 0;#}
+{#                transform: translateY(10px);#}
+{#            }#}
+{#            to {#}
+{#                opacity: 1;#}
+{#                transform: translateY(0);#}
+{#            }#}
+{#        }#}
+{##}
+{#        /* Стили заголовка */#}
+{#        h1 {#}
+{#            font-size: 2.5em;#}
+{#            color: #007bff;#}
+{#            text-align: center;#}
+{#            margin-bottom: 10px;#}
+{#            text-transform: uppercase;#}
+{#            animation: glow 1.5s infinite alternate;#}
+{#        }#}
+{##}
+{#        /* Анимация для заголовка */#}
+{#        @keyframes glow {#}
+{#            from {#}
+{#                text-shadow: 0 0 5px #007bff, 0 0 10px #007bff, 0 0 15px #007bff;#}
+{#            }#}
+{#            to {#}
+{#                text-shadow: 0 0 10px #007bff, 0 0 20px #007bff, 0 0 30px #007bff;#}
+{#            }#}
+{#        }#}
+{##}
+{#        /* Оформление изображения с эффектом при наведении */#}
+{#        .product-image {#}
+{#            display: flex;#}
+{#            justify-content: center;#}
+{#            margin: 20px 0;#}
+{#            transition: transform 0.3s;#}
+{#        }#}
+{##}
+{#        .product-image img {#}
+{#            max-width: 100%;#}
+{#            height: auto;#}
+{#            border-radius: 8px;#}
+{#            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);#}
+{#            transition: transform 0.3s;#}
+{#        }#}
+{##}
+{#        .product-image:hover img {#}
+{#            transform: scale(1.05);#}
+{#        }#}
+{##}
+{#        /* Стили для цены */#}
+{#        .price {#}
+{#            font-size: 1.5em;#}
+{#            color: #28a745;#}
+{#            font-weight: bold;#}
+{#            text-align: center;#}
+{#            margin-bottom: 15px;#}
+{#        }#}
+{##}
+{#        /* Описание с плавным появлением */#}
+{#        .description {#}
+{#            font-size: 1.1em;#}
+{#            line-height: 1.6;#}
+{#            margin-bottom: 20px;#}
+{#            text-align: center;#}
+{#            opacity: 0;#}
+{#            animation: fadeIn 1s forwards;#}
+{#            animation-delay: 0.5s;#}
+{#        }#}
+{##}
+{#        /* Стили кнопок */#}
+{#        .btn {#}
+{#            display: inline-block;#}
+{#            padding: 10px 20px;#}
+{#            margin: 10px 5px;#}
+{#            font-size: 1em;#}
+{#            color: #fff;#}
+{#            text-align: center;#}
+{#            text-decoration: none;#}
+{#            border-radius: 5px;#}
+{#            transition: background-color 0.3s, transform 0.2s;#}
+{#        }#}
+{##}
+{#        .btn-edit {#}
+{#            background-color: #007bff;#}
+{#        }#}
+{##}
+{#        .btn-edit:hover {#}
+{#            background-color: #0056b3;#}
+{#            transform: scale(1.1);#}
+{#        }#}
+{##}
+{#        .btn-delete {#}
+{#            background-color: #dc3545;#}
+{#        }#}
+{##}
+{#        .btn-delete:hover {#}
+{#            background-color: #c82333;#}
+{#            transform: scale(1.1);#}
+{#        }#}
+{##}
+{#        /* Сообщение об отсутствии изображения */#}
+{#        .no-image {#}
+{#            text-align: center;#}
+{#            font-style: italic;#}
+{#            color: #666;#}
+{#        }#}
+{#    </style>#}
+{#</head>#}
+{#<body>#}
+{##}
+{#<div class="container">#}
+{#    <h1>{{ product.name }}</h1>#}
+{##}
+{#    <div class="price">Цена: {{ product.price }} ₽</div>#}
+{##}
+{#    <div class="description">{{ product.description }}</div>#}
+{##}
+{#    <div class="product-image">#}
+{#        {% if product.image %}#}
+{#            <img src="{{ product.image.url }}" alt="{{ product.name }}">#}
+{#        {% else %}#}
+{#            <p class="no-image">Изображение отсутствует</p>#}
+{#        {% endif %}#}
+{#    </div>#}
+{##}
+{#    <div class="buttons">#}
+{#        <a href="{% url 'catalog:product_update' product.pk %}" class="btn btn-edit">Редактировать</a>#}
+{#        <a href="{% url 'catalog:product_delete' product.pk %}" class="btn btn-delete">Удалить</a>#}
+{#    </div>#}
+{#</div>#}
+{##}
+{#</body>#}
+{#</html>#}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ product.name }}</title>
+    <style>
+        /* Основные стили страницы */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        /* Контейнер страницы */
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        /* Анимация для плавного появления */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Стили заголовка */
+        h1 {
+            font-size: 2.5em;
+            color: #007bff;
+            text-align: center;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            animation: glow 1.5s infinite alternate;
+        }
+
+        /* Анимация для заголовка */
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 5px #007bff, 0 0 10px #007bff, 0 0 15px #007bff;
+            }
+            to {
+                text-shadow: 0 0 10px #007bff, 0 0 20px #007bff, 0 0 30px #007bff;
+            }
+        }
+
+        /* Оформление изображения с эффектом при наведении */
+        .product-image {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .product-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+
+        .product-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Стили для цены */
+        .price {
+            font-size: 1.5em;
+            color: #28a745;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        /* Описание с плавным появлением */
+        .description {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: center;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+            animation-delay: 0.5s;
+        }
+
+        /* Стили кнопок */
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px 5px;
+            font-size: 1em;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .btn-edit {
+            background-color: #007bff;
+        }
+
+        .btn-edit:hover {
+            background-color: #0056b3;
+            transform: scale(1.1);
+        }
+
+        .btn-delete {
+            background-color: #dc3545;
+        }
+
+        .btn-delete:hover {
+            background-color: #c82333;
+            transform: scale(1.1);
+        }
+
+        /* Сообщение об отсутствии изображения */
+        .no-image {
+            text-align: center;
+            font-style: italic;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>{{ product.name }}</h1>
+
+    <div class="price">Цена: {{ product.price }} ₽</div>
+
+    <div class="description">{{ product.description }}</div>
+
+    <div class="product-image">
+        {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        {% else %}
+            <p class="no-image">Изображение отсутствует</p>
+        {% endif %}
+    </div>
+
+    <div class="buttons d-flex justify-content-center">
+        <a href="{% url 'catalog:product_update' product.pk %}" class="btn btn-edit">Редактировать</a>
+        <a href="{% url 'catalog:product_delete' product.pk %}" class="btn btn-delete">Удалить</a>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+{#{% extends 'base.html' %}#}
+{#{% load catalog_my_tags %}#}
+{#{% block content %}#}
+{#    <div class="album py-5 bg-body-tertiary">#}
+{#        <div class="container">#}
+{#            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 d-flex">#}
+{#                {% for product in products %}#}
+{#                    <div class="col">#}
+{#                        <div class="card shadow-sm w-100">#}
+{#                            <img src="{{ product.image | media_filter }}" class="img-fluid"#}
+{#                                 style="height: 12rem; object-fit: cover;">#}
+{#                            <div class="card-body">#}
+{#                                <p class="card-text">{{ product.name }}</p>#}
+{#                                <p class="card-text">Описание: {{ product.description|truncatechars:100 }}</p>#}
+{#                                <div class="d-flex justify-content-between align-items-center">#}
+{#                                    <div class="btn-group">#}
+{#                                        <a class="btn btn-primary" href="{% url 'catalog:product_detail' product.pk %}"#}
+{#                                           role="button">Перейти к товару</a>#}
+{#                                    </div>#}
+{##}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                {% endfor %}#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#{% endblock %}#}
+
+{% extends 'base.html' %}
+{% load catalog_my_tags %}
+{% block content %}
+    <div class="album py-5 bg-body-tertiary">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+                {% for product in products %}
+                    <div class="col">
+                        <div class="card shadow-lg border-light rounded-3 h-100">
+                            <img src="{{ product.image | media_filter }}" class="card-img-top img-fluid"
+                                 alt="{{ product.name }}"
+                                 style="height: 200px; object-fit: cover; transition: transform 0.3s ease;">
+                            <div class="card-body">
+                                <h5 class="card-title text-center">{{ product.name }}</h5>
+                                <p class="card-text text-muted">
+                                    Описание: {{ product.description|truncatechars:100 }}</p>
+                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                    <div class="btn-group">
+                                        <a class="btn btn-primary" href="{% url 'catalog:product_detail' product.pk %}"
+                                           role="button">
+                                            Перейти к товару
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Эффект на картинку при наведении
+        const cards = document.querySelectorAll('.card-img-top');
+        cards.forEach(card => {
+            card.addEventListener('mouseover', () => {
+                card.style.transform = 'scale(1.05)';
+            });
+            card.addEventListener('mouseout', () => {
+                card.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+{% endblock %}
