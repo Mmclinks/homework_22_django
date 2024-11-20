@@ -133,21 +133,6 @@
             font-style: italic;
             color: #666;
         }
-
-        /* Адаптивность */
-        @media (max-width: 768px) {
-            .container {
-                padding: 15px;
-            }
-
-            .product-image img {
-                height: auto;
-            }
-
-            .description {
-                font-size: 1em;
-            }
-        }
     </style>
 </head>
 <body>
@@ -155,17 +140,9 @@
 <div class="container">
     <h1>{{ product.name }}</h1>
 
-    {% if product.price %}
         <div class="price">Цена: {{ product.price }} ₽</div>
-    {% else %}
-        <div class="price text-muted">Цена не указана</div>
-    {% endif %}
 
-    {% if product.description %}
         <div class="description">{{ product.description }}</div>
-    {% else %}
-        <div class="description text-muted">Описание отсутствует</div>
-    {% endif %}
 
     <div class="product-image">
         {% if product.image %}
@@ -175,12 +152,10 @@
         {% endif %}
     </div>
 
-    {% if request.user == product.owner or request.user.has_perm('catalog.can_unpublish_product') %}
         <div class="buttons d-flex justify-content-center">
             <a href="{% url 'catalog:product_update' product.pk %}" class="btn btn-edit">Редактировать</a>
             <a href="{% url 'catalog:product_delete' product.pk %}" class="btn btn-delete">Удалить</a>
         </div>
-    {% endif %}
 </div>
 
 </body>

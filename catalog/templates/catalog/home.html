@@ -20,14 +20,6 @@
                                            role="button">
                                             Перейти к товару
                                         </a>
-                                        {% if request.user == product.owner or request.user.has_perm('catalog.can_unpublish_product') %}
-                                            <a class="btn btn-warning" href="{% url 'catalog:product_update' product.pk %}" role="button">
-                                                Редактировать
-                                            </a>
-                                            <a class="btn btn-danger" href="{% url 'catalog:product_delete' product.pk %}" role="button">
-                                                Удалить
-                                            </a>
-                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
