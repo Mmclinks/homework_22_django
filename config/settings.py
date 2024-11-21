@@ -80,6 +80,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6379/1',
+    }
+}
+
 # LANGUAGE_CODE = 'en-us'
 LANGUAGE_CODE = 'ru'
 

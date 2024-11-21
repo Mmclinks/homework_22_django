@@ -5,6 +5,7 @@ from catalog.apps import CatalogConfig
 
 from .views import (ContactsView, ProductCreateView, ProductDeleteView,
                     ProductDetailView, ProductListView, ProductUpdateView)
+from .views import ProductsByCategoryView
 
 app_name = CatalogConfig.name
 
@@ -34,4 +35,5 @@ urlpatterns = [
     ),
     path("", ProductListView.as_view(), name="products_list"),
     path("product/create/", ProductCreateView.as_view(), name="product_create"),
+    path('category/<int:category_id>/', ProductsByCategoryView.as_view(), name='products_by_category'),
 ]

@@ -3,10 +3,16 @@ from django.core.mail import EmailMessage
 from django.urls import reverse_lazy
 from django.views.generic import DeleteView, DetailView, FormView, ListView
 from django.views.generic.edit import CreateView, UpdateView
-from django.contrib.auth.mixins import LoginRequiredMixin  # Импортируем миксин
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseForbidden
 from catalog.forms.forms import ContactForm, ProductForm
 from catalog.models import Product
+
+from django.views.decorators.cache import cache_page
+from django.utils.decorators import method_decorator
+from django.views.generic import DetailView
+from django.views.generic import ListView
+from .services import get_products_by_category
 
 
 class ProductListView(ListView):
@@ -29,13 +35,11 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
+@method_decorator(cache_page(60 * 15), name='dispatch')  # Кеш на 15 минут
 class ProductDetailView(DetailView):
-    """
-    Представление страницы товара
-    """
     model = Product
-    template_name = "catalog/product_detail.html"
-    context_object_name = "product"
+    template_name = 'catalog/product_detail.html'
+    context_object_name = 'product'
 
 
 class ProductUpdateView(LoginRequiredMixin, UpdateView):
@@ -103,3 +107,12 @@ class ContactsView(FormView):
         Если форма недействительна, просто отобразим шаблон с ошибками
         """
         return super().form_invalid(form)
+
+
+class ProductsByCategoryView(ListView):
+    template_name = 'catalog/products_by_category.html'
+    context_object_name = 'products'
+
+    def get_queryset(self):
+        category_id = self.kwargs.get('category_id')
+        return get_products_by_category(category_id)
