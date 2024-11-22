@@ -1,28 +1,10 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 
-
-class Category(models.Model):
-    """
-    Определение модели Категории
-    """
-
-    name = models.CharField(max_length=100, verbose_name="Наименование категории")
-    description = models.TextField(verbose_name="Описание категории")
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = "категория"
-        verbose_name_plural = "категории"
-        ordering = ["name"]
+User = get_user_model()
 
 
 class Product(models.Model):
-    """
-    Определение модели товара
-    """
-
     name = models.CharField(
         max_length=150,
         verbose_name="Наименование продукта",
@@ -36,6 +18,12 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    is_published = models.BooleanField(
+        default=False, verbose_name="Опубликован", help_text="Статус публикации продукта"
+    )
+    owner = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="products", verbose_name="Владелец"
+    )
 
     def __str__(self):
         return f"{self.name}. Категория: {self.category}"
@@ -44,3 +32,6 @@ class Product(models.Model):
         verbose_name = "продукт"
         verbose_name_plural = "продукты"
         ordering = ["name", "category", "price"]
+        permissions = [
+            ("can_unpublish_product", "Может отменять публикацию продукта"),
+        ]

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Продукты категории</title>
+</head>
+<body>
+<h1>Продукты категории</h1>
+<ul>
+    {% for product in products %}
+    <li>
+        <a href="{% url 'catalog:product_detail' product.id %}">{{ product.name }}</a>
+        - {{ product.price }} ₽
+    </li>
+    {% empty %}
+    <li>Нет продуктов в данной категории</li>
+    {% endfor %}
+</ul>
+</body>
+</html>
